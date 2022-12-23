@@ -13,12 +13,7 @@
     "declaration": true,
     "strict": true,
     "pretty": true,
-    "lib": [
-      "es2020"
-    ]
+    "lib": ["es2020"]
   },
-  "exclude": [
-    "**/*.test.ts",
-    "**/.dist"
-  ]
+  "exclude": ["**/*.test.ts", "**/.dist"]
 }

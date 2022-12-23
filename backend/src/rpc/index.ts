@@ -1,16 +1,20 @@
-import { WebSocketProvider } from "@ethersproject/providers"
-
+import { JsonRpcProvider, WebSocketProvider } from "@ethersproject/providers";
 
 if (process.env.RPC_ALCHEMY_WSS === undefined) {
-  throw new Error('missing provider reference in env variables')
+  throw new Error("missing provider reference in env variables");
 }
 
 if (process.env.RPC_ALCHEMY_MAINNET_WSS === undefined) {
-  throw new Error('missing mainnet provider reference in env variables')
+  throw new Error("missing mainnet provider reference in env variables");
 }
 
-export const provider = new WebSocketProvider(process.env.RPC_ALCHEMY_WSS)
-export const providerMainnet = new WebSocketProvider(process.env.RPC_ALCHEMY_MAINNET_WSS)
+export const provider = new WebSocketProvider(process.env.RPC_ALCHEMY_WSS);
+export const providerMainnet = new WebSocketProvider(
+  process.env.RPC_ALCHEMY_MAINNET_WSS
+);
+export const providerTestnet = new JsonRpcProvider(
+  process.env?.RPC_ALCHEMY_TESTNET_RPC
+);
 
 // const provider = new EtherscanProvider()
 // provider.getHistory('')

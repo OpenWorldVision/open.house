@@ -115,6 +115,7 @@ export async function getIdentityFromENS(
   address: string,
   provider: BaseProvider
 ): Promise<IEnsClaim> {
+  
 
   const ensName = await provider.lookupAddress(address)
   

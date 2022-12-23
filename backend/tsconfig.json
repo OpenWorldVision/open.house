@@ -3,17 +3,12 @@
   "compilerOptions": {
     "outDir": ".dist/cjs",
     "rootDir": "src",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "module": "CommonJS",
     "declarationDir": ".dist/types",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "lib": [
-      "es2021",
-      "dom"
-    ],
+    "lib": ["es2021", "dom"]
   },
   "references": [
     {

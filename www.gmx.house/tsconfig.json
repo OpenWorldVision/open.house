@@ -7,10 +7,7 @@
     "declarationDir": ".dist/types",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": [
-      "DOM",
-      "ESNext"
-    ]
+    "lib": ["DOM", "ESNext"]
   },
   "references": []
 }

@@ -1,76 +1,78 @@
 {
-    "name": "backend",
-    "version": "0.3.0",
-    "license": "MIT",
-    "module": ".dist/esm/index.js",
-    "main": ".dist/cjs/index.js",
-    "private": true,
-    "files": [
-        ".dist"
-    ],
-    "sideEffects": false,
-    "types": ".dist/types/index.d.ts",
-    "scripts": {
-        "start": "node -r dotenv/config .dist/cjs/server",
-        "dev": "tsnd -r dotenv/config --respawn ./src/server.ts",
-        "clean": "yarn g:tsc:clean",
-        "build:project": "yarn g:tsc:project",
-        "build:cjs": "yarn g:tsc:cjs",
-        "build": "yarn build:cjs"
-    },
-    "dependencies": {
-        "@aelea/core": "1.3.0",
-        "@ethersproject/abi": "5.7.0",
-        "@ethersproject/abstract-signer": "5.7.0",
-        "@ethersproject/bignumber": "^5.7.0",
-        "@ethersproject/bytes": "5.7.0",
-        "@ethersproject/contracts": "^5.7.0",
-        "@ethersproject/providers": "5.7.1",
-        "@gambitdao/gmx-middleware": "0.7.0",
-        "@mikro-orm/core": "5.4.2",
-        "@mikro-orm/mongo-highlighter": "^1.0.0",
-        "@mikro-orm/mongodb": "5.4.2",
-        "@mikro-orm/reflection": "^5.4.2",
-        "@most/core": "1.6.1",
-        "@most/disposable": "1.3.0",
-        "@most/prelude": "1.8.0",
-        "@most/scheduler": "1.3.0",
-        "@most/types": "1.1.0",
-        "@types/compression": "^1.7.2",
-        "@types/isomorphic-fetch": "^0.0.36",
-        "@urql/core": "^3.0.4",
-        "common": "workspace:*",
-        "compression": "^1.7.4",
-        "concurrently": "^7.4.0",
-        "cors": "^2.8.5",
-        "ethers": "^5.7.1",
-        "express": "^4.18.2",
-        "express-promise-router": "^4.1.1",
-        "express-session": "^1.17.3",
-        "graphql": "^16.6.0",
-        "isomorphic-fetch": "^3.0.0",
-        "ws": "^8.9.0"
-    },
-    "devDependencies": {
-        "@types/cors": "^2.8.12",
-        "@types/express": "^4.17.14",
-        "@types/express-serve-static-core": "^4.17.31",
-        "@types/express-session": "^1.17.5",
-        "@types/node": "18.8.5",
-        "@types/ws": "^8.5.3",
-        "dotenv": "^16.0.3",
-        "ts-node": "^10.9.1",
-        "ts-node-dev": "^2.0.0",
-        "typescript": "^4.8.4"
-    },
-    "mikro-orm": {
-        "useTsNode": true,
-        "configPaths": [
-            "./app/mikro-orm.config.ts",
-            "./dist/mikro-orm.config.js"
-        ]
-    },
-    "engines": {
-        "node": "16.4.x"
-    }
+  "name": "backend",
+  "version": "0.3.0",
+  "license": "MIT",
+  "module": ".dist/esm/index.js",
+  "main": ".dist/cjs/index.js",
+  "private": true,
+  "files": [
+    ".dist"
+  ],
+  "sideEffects": false,
+  "types": ".dist/types/index.d.ts",
+  "scripts": {
+    "start": "node -r dotenv/config .dist/cjs/server",
+    "dev": "tsnd -r dotenv/config --respawn ./src/server.ts",
+    "clean": "yarn g:tsc:clean",
+    "build:project": "yarn g:tsc:project",
+    "build:cjs": "yarn g:tsc:cjs",
+    "build": "yarn build:cjs",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json,ts}\""
+  },
+  "dependencies": {
+    "@aelea/core": "1.3.0",
+    "@ethersproject/abi": "5.7.0",
+    "@ethersproject/abstract-signer": "5.7.0",
+    "@ethersproject/bignumber": "^5.7.0",
+    "@ethersproject/bytes": "5.7.0",
+    "@ethersproject/contracts": "^5.7.0",
+    "@ethersproject/providers": "5.7.1",
+    "@gambitdao/gmx-middleware": "0.7.0",
+    "@mikro-orm/core": "5.4.2",
+    "@mikro-orm/mongo-highlighter": "^1.0.0",
+    "@mikro-orm/mongodb": "5.4.2",
+    "@mikro-orm/reflection": "^5.4.2",
+    "@most/core": "1.6.1",
+    "@most/disposable": "1.3.0",
+    "@most/prelude": "1.8.0",
+    "@most/scheduler": "1.3.0",
+    "@most/types": "1.1.0",
+    "@types/compression": "^1.7.2",
+    "@types/isomorphic-fetch": "^0.0.36",
+    "@urql/core": "^3.0.4",
+    "common": "workspace:*",
+    "compression": "^1.7.4",
+    "concurrently": "^7.4.0",
+    "cors": "^2.8.5",
+    "ethers": "^5.7.1",
+    "express": "^4.18.2",
+    "express-promise-router": "^4.1.1",
+    "express-session": "^1.17.3",
+    "graphql": "^16.6.0",
+    "isomorphic-fetch": "^3.0.0",
+    "ws": "^8.9.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/express-serve-static-core": "^4.17.31",
+    "@types/express-session": "^1.17.5",
+    "@types/node": "18.8.5",
+    "@types/ws": "^8.5.3",
+    "dotenv": "^16.0.3",
+    "prettier": "^2.8.1",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./app/mikro-orm.config.ts",
+      "./dist/mikro-orm.config.js"
+    ]
+  },
+  "engines": {
+    "node": "16.4.x"
+  }
 }

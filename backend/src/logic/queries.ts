@@ -1,9 +1,20 @@
-import { gql, TypedDocumentNode } from "@urql/core"
-import { IPagePositionParamApi, ITimerangeParamApi, IIdentifiableEntity, IPricefeed, ITrade, TradeStatus, IAccountQueryParamApi, IChainParamApi, IPricefeedParamApi, IPriceLatest, IPriceTimelineParamApi } from "@gambitdao/gmx-middleware"
+import { gql, TypedDocumentNode } from "@urql/core";
+import {
+  IPagePositionParamApi,
+  ITimerangeParamApi,
+  IIdentifiableEntity,
+  IPricefeed,
+  ITrade,
+  TradeStatus,
+  IAccountQueryParamApi,
+  IChainParamApi,
+  IPricefeedParamApi,
+  IPriceLatest,
+  IPriceTimelineParamApi,
+} from "@gambitdao/gmx-middleware";
 
-export type IAccountTradeListParamApi = IChainParamApi & IAccountQueryParamApi & {status: TradeStatus};
-
-
+export type IAccountTradeListParamApi = IChainParamApi &
+  IAccountQueryParamApi & { status: TradeStatus };
 
 const schemaFragments = `
 
@@ -103,97 +114,173 @@ fragment tradeFields on Trade {
   liquidatedPosition { ...liquidatePositionFields }
   
 }
-`
+`;
 
+export const tradeSettledListQuery: TypedDocumentNode<
+  { trades: ITrade[] },
+  Partial<IPagePositionParamApi & ITimerangeParamApi>
+> = gql`
+  ${schemaFragments}
 
-export const tradeSettledListQuery: TypedDocumentNode<{trades: ITrade[]}, Partial<IPagePositionParamApi & ITimerangeParamApi>> = gql`
-${schemaFragments}
-
-query ($pageSize: Int, $offset: Int = 0, $from: Int = 0, $to: Int = 1999999999) {
-  trades(first: $pageSize, skip: $offset, where: {settledTimestamp_gt: $from, settledTimestamp_lt: $to, collateral_gt: "1500000000000000000000000000000000"}) {
+  query (
+    $pageSize: Int
+    $offset: Int = 0
+    $from: Int = 0
+    $to: Int = 1999999999
+  ) {
+    trades(
+      first: $pageSize
+      skip: $offset
+      where: {
+        settledTimestamp_gt: $from
+        settledTimestamp_lt: $to
+        collateral_gt: "1500000000000000000000000000000000"
+      }
+    ) {
       ...tradeFields
+    }
   }
-}
-`
+`;
 
-export const competitionAccountListDoc: TypedDocumentNode<{trades: ITrade[]}, Partial<IPagePositionParamApi & ITimerangeParamApi>> = gql`
-${schemaFragments}
+export const competitionAccountListDoc: TypedDocumentNode<
+  { trades: ITrade[] },
+  Partial<IPagePositionParamApi & ITimerangeParamApi>
+> = gql`
+  ${schemaFragments}
 
-query ($pageSize: Int, $offset: Int = 0, $from: Int = 0, $to: Int = 1999999999) {
-  trades(first: $pageSize, skip: $offset, where: {timestamp_gte: $from, timestamp_lte: $to}) {
+  query (
+    $pageSize: Int
+    $offset: Int = 0
+    $from: Int = 0
+    $to: Int = 1999999999
+  ) {
+    trades(
+      first: $pageSize
+      skip: $offset
+      where: { timestamp_gte: $from, timestamp_lte: $to }
+    ) {
       ...tradeFields
+    }
   }
-}
-`
+`;
 
-export const tradeOpenListQuery: TypedDocumentNode<{trades: ITrade[]}, Partial<IPagePositionParamApi & ITimerangeParamApi>> = gql`
-${schemaFragments}
+export const tradeOpenListQuery: TypedDocumentNode<
+  { trades: ITrade[] },
+  Partial<IPagePositionParamApi & ITimerangeParamApi>
+> = gql`
+  ${schemaFragments}
 
-query ($pageSize: Int, $offset: Int = 0, $from: Int = 0, $to: Int = 1999999999) {
-  trades(first: $pageSize, skip: $offset, where: {status: open, collateral_gt: "500000000000000000000000000000000"}) {
+  query (
+    $pageSize: Int
+    $offset: Int = 0
+    $from: Int = 0
+    $to: Int = 1999999999
+  ) {
+    trades(
+      first: $pageSize
+      skip: $offset
+      where: {
+        status: open
+        collateral_gt: "500000000000000000000000000000000"
+      }
+    ) {
       ...tradeFields
+    }
   }
-}
-`
+`;
 
-export const accountTradeListQuery: TypedDocumentNode<{trades: ITrade[]}, Partial<IAccountTradeListParamApi>> = gql`
-${schemaFragments}
+export const accountTradeListQuery: TypedDocumentNode<
+  { trades: ITrade[] },
+  Partial<IAccountTradeListParamApi>
+> = gql`
+  ${schemaFragments}
 
-query ($pageSize: Int = 1000, $account: String) {
-  trades(first: $pageSize, skip: $offset, where: {account: $account}) {
+  query ($pageSize: Int = 1000, $account: String) {
+    trades(first: $pageSize, skip: $offset, where: { account: $account }) {
       ...tradeFields
+    }
   }
-}
-`
+`;
 
-export const tradeQuery: TypedDocumentNode<{trade: ITrade}, IIdentifiableEntity> = gql`
-${schemaFragments}
+export const tradeQuery: TypedDocumentNode<
+  { trade: ITrade },
+  IIdentifiableEntity
+> = gql`
+  ${schemaFragments}
 
-query ($id: String) {
-  trade(id: $id) {
+  query ($id: String) {
+    trade(id: $id) {
       ...tradeFields
+    }
   }
-}
-`
+`;
 
-
-export const pricefeed: TypedDocumentNode<{ pricefeeds: IPricefeed[] }, Omit<IPricefeedParamApi, 'chain'>> = gql`
-query($from: Int, $to: Int = 1999999999, $tokenAddress: TokenAddress, $interval: IntervalTime) {
-  pricefeeds(first: 1000, orderBy: timestamp, orderDirection: asc, where: {tokenAddress: $tokenAddress, interval: $interval, timestamp_gte: $from, timestamp_lte: $to }) {
-    id
-    timestamp
-    o
-    h
-    l
-    c
-    tokenAddress
-    interval
+export const pricefeed: TypedDocumentNode<
+  { pricefeeds: IPricefeed[] },
+  Omit<IPricefeedParamApi, "chain">
+> = gql`
+  query (
+    $from: Int
+    $to: Int = 1999999999
+    $tokenAddress: TokenAddress
+    $interval: IntervalTime
+  ) {
+    pricefeeds(
+      first: 1000
+      orderBy: timestamp
+      orderDirection: asc
+      where: {
+        tokenAddress: $tokenAddress
+        interval: $interval
+        timestamp_gte: $from
+        timestamp_lte: $to
+      }
+    ) {
+      id
+      timestamp
+      o
+      h
+      l
+      c
+      tokenAddress
+      interval
+    }
   }
-}
-`
+`;
 
-
-export const priceTimelineQuery: TypedDocumentNode<{priceTimelines: IPricefeed[]}, IPriceTimelineParamApi> = gql`
-query ($from: Int, $to: Int, $tokenAddress: TokenAddress ) {
-  priceTimelines(first: 1000, orderBy: unixTimestamp, orderDirection: asc, where: { tokenAddress: $tokenAddress, timestamp_gte: $from, timestamp_lte: $to }) {
-    timestamp,
-    value
+export const priceTimelineQuery: TypedDocumentNode<
+  { priceTimelines: IPricefeed[] },
+  IPriceTimelineParamApi
+> = gql`
+  query ($from: Int, $to: Int, $tokenAddress: TokenAddress) {
+    priceTimelines(
+      first: 1000
+      orderBy: unixTimestamp
+      orderDirection: asc
+      where: {
+        tokenAddress: $tokenAddress
+        timestamp_gte: $from
+        timestamp_lte: $to
+      }
+    ) {
+      timestamp
+      value
+    }
   }
-}
-`
+`;
 
-
-
-export const latestPriceTimelineQuery: TypedDocumentNode<{priceLatests: IPriceLatest[]}, {}> = gql`
-query {
-  priceLatests {
-    id
-    value
-    timestamp
+export const latestPriceTimelineQuery: TypedDocumentNode<
+  { priceLatests: IPriceLatest[] },
+  {}
+> = gql`
+  query {
+    priceLatests {
+      id
+      value
+      timestamp
+    }
   }
-}
-`
-
+`;
 
 // export const latestPriceTimelineArbitrumQuery: TypedDocumentNode<IPriceTimelineArbitrumMap, {}> = gql`
 // ${schemaFragments}
@@ -214,7 +301,6 @@ query {
 // }
 // `
 
-
 // export const latestPriceTimelineAvalancheQuery: TypedDocumentNode<IPriceTimelineArbitrumMap, {}> = gql`
 // ${schemaFragments}
 
@@ -230,5 +316,3 @@ query {
 //   }
 // }
 // `
-
-

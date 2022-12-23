@@ -2869,6 +2869,7 @@ __metadata:
     express-session: ^1.17.3
     graphql: ^16.6.0
     isomorphic-fetch: ^3.0.0
+    prettier: ^2.8.1
     ts-node: ^10.9.1
     ts-node-dev: ^2.0.0
     typescript: ^4.8.4
@@ -7008,6 +7009,7 @@ __metadata:
     "@typescript-eslint/parser": 5.40.0
     concurrently: ^7.4.0
     eslint: 8.25.0
+    prettier: ^2.8.1
     typescript: ^4.8.4
   languageName: unknown
   linkType: soft
@@ -7594,6 +7596,15 @@ __metadata:
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
   checksum: cd192ec0d0a8e4c6da3bb80e4f62afe336df3f76271ac6deb0e6a36187133b6073a19e9727a1ff108cd8b9982e4768850d413baa71214dd80c7979617dca827a
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.8.1":
+  version: 2.8.1
+  resolution: "prettier@npm:2.8.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 4f21a0f1269f76fb36f54e9a8a1ea4c11e27478958bf860661fb4b6d7ac69aac1581f8724fa98ea3585e56d42a2ea317a17ff6e3324f40cb11ff9e20b73785cc
   languageName: node
   linkType: hard
 

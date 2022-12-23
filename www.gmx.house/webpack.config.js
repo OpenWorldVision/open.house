@@ -1,8 +1,8 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const CopyPlugin = require("copy-webpack-plugin")
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 /**
  * @type import('webpack').Configuration
@@ -11,10 +11,10 @@ module.exports = {
   mode: "development",
   watch: false,
   context: __dirname, // to automatically find tsconfig.json
-  devtool: 'eval-source-map',
+  devtool: "eval-source-map",
   entry: {
-    theme: './src/assignThemeSync.ts',
-    main: './src/index.ts',
+    theme: "./src/assignThemeSync.ts",
+    main: "./src/index.ts",
   },
   // optimization: {
   //   runtimeChunk: true,
@@ -28,43 +28,40 @@ module.exports = {
           loader: "ts-loader",
           options: {
             transpileOnly: true, // Set to true if you are using fork-ts-checker-webpack-plugin
-            projectReferences: true
-          }
-        }
-      }
-    ]
+            projectReferences: true,
+          },
+        },
+      },
+    ],
   },
   resolve: {
-    modules: [
-      "node_modules",
-      path.resolve(__dirname)
-    ],
-    extensions: [".ts", '.js'],
+    modules: ["node_modules", path.resolve(__dirname)],
+    extensions: [".ts", ".js"],
     fallback: {
-      '@walletconnect/encoding': require.resolve("@walletconnect/encoding"),
+      "@walletconnect/encoding": require.resolve("@walletconnect/encoding"),
       // ethers: false,
       ethers: require.resolve("ethers"),
       process: false,
       events: require.resolve("eventemitter3"),
-      buffer: false
+      buffer: false,
       // buffer: require.resolve("buffer/")
-    }
+    },
   },
   plugins: [
     new webpack.ProvidePlugin({
-      process: 'process/browser',
-      Buffer: ['buffer', 'Buffer'],
+      process: "process/browser",
+      Buffer: ["buffer", "Buffer"],
     }),
     new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'index.html'
+      template: "index.html",
     }),
     new CopyPlugin({
       patterns: [
-        { from: "assets", to: 'assets' },
-        { from: '_redirects' },
-        { from: 'robots.txt' },
-      ]
+        { from: "assets", to: "assets" },
+        { from: "_redirects" },
+        { from: "robots.txt" },
+      ],
     }),
   ],
   // node: { crypto: true, stream: true },
@@ -72,17 +69,17 @@ module.exports = {
     port: 3000,
     https: true,
     proxy: {
-      '/api': 'http://localhost:5555',
-      '/api-ws': {
-        target: 'ws://localhost:5555',
-        ws: true
+      "/api": "http://localhost:5555",
+      "/api-ws": {
+        target: "ws://localhost:5555",
+        ws: true,
       },
     },
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   output: {
     clean: true,
-    filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, '../backend/.dist/cjs/public')
-  }
-}
+    filename: "[name].[contenthash].js",
+    path: path.resolve(__dirname, "../backend/.dist/cjs/public"),
+  },
+};

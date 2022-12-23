@@ -1,3 +1,3 @@
-import { newDefaultScheduler } from "@most/scheduler"
+import { newDefaultScheduler } from "@most/scheduler";
 
-export const scheduler = newDefaultScheduler()
+export const scheduler = newDefaultScheduler();
