@@ -8,8 +8,9 @@ if (process.env.RPC_ALCHEMY_MAINNET_WSS === undefined) {
   throw new Error("missing mainnet provider reference in env variables");
 }
 
-export const provider = new WebSocketProvider(process.env.RPC_ALCHEMY_WSS);
-export const providerMainnet = new WebSocketProvider(
+
+export const provider = new JsonRpcProvider(process.env.RPC_ALCHEMY_WSS);
+export const providerMainnet = new JsonRpcProvider(
   process.env.RPC_ALCHEMY_MAINNET_WSS
 );
 export const providerTestnet = new JsonRpcProvider(
